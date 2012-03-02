@@ -1,0 +1,7 @@
+.project
+.settings
+.actionScriptProperties
+.flexProperties
+.flexLibProperties
+.flexConfig.xml
+bin-*
