@@ -1,0 +1,7 @@
+The point of this project is to discover a clear migration path from a Flash application to a Maven + FlexMojos application. The main goals are to 1) not have to check compiled artifacts into SCM, and 2) not have to compile artifacts during the build process, allowing CI.
+
+These goals can be made possible by letting designers/developers who work with FLAs to publish their artifacts directly to the Maven repository. The approach I've taken so-far is to use Ant to massage Flash SWFs into optimized RSL-capable SWFs/SWCs with the Flex SDK. We could also publish them directly, but making them available as RSLs enables more interesting loading options. The unoptimized versions remain in the SWC for compile-time type information.
+
+Currently flash artifacts are only installed to the local maven repo, but publishing remotely is only a matter of switching from the install task to the deploy task in the ant script.
+
+
