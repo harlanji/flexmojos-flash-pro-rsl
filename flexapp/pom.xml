@@ -27,4 +27,69 @@
     <module>application</module>
     <module>flexapp-web</module>
   </modules>
+  
+  <properties>
+    <!--
+      flash.swf.version and  flexmojos.targetPlayer are subtly different. 
+      The former is for the flash version classifier of framework artifacts; 
+      the latter is for the flexMojos compiler. why they are not the same 
+      thing is beyond me.
+      
+      http://help.adobe.com/en_US/flex/using/WS2db454920e96a9e51e63e3d11c0bf69084-7ee0.html
+      
+      flexmojos w/ SDK version:
+      http://flexmojos.sonatype.org/faq.html#2
+      
+      available SDK version/SWF versions. the classifier is SWF version:
+      https://repository.sonatype.org/content/groups/flexgroup/com/adobe/flex/framework/playerglobal/
+      
+      Dependencies that use Adobe libraries should specify flash.swf.version
+      as their classifier:
+      
+      <dependency>
+        <groupId>com.adobe.flex.framework</groupId>
+        <artifactId>playerglobal</artifactId>
+        <classifier>${flash.swf.version}</classifier>
+        <type>swc</type>
+      </dependency>
+    -->
+    <flexmojos.version>4.0-RC2</flexmojos.version>
+    <flex.sdk.version>4.1.0.16248</flex.sdk.version>
+    <flash.swf.version>10.0</flash.swf.version>
+    <flexmojos.targetPlayer>10.0</flexmojos.targetPlayer>
+  </properties>
+  
+  
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-maven-plugin</artifactId>
+          <version>${flexmojos.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <swfVersion>${flash.swf.version}</swfVersion>
+            <targetPlayer>${flexmojos.targetPlayer}</targetPlayer>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.adobe.flex</groupId>
+              <artifactId>compiler</artifactId>
+              <version>${flex.sdk.version}</version>
+              <type>pom</type>
+            </dependency>
+            <dependency>
+              <groupId>com.adobe.flex.compiler</groupId>
+              <artifactId>asdoc</artifactId>
+              <version>${flex.sdk.version}</version>
+              <classifier>template</classifier>
+              <type>zip</type>
+            </dependency>
+          </dependencies>
+        </plugin>
+        
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
